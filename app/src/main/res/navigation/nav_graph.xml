@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_board" />
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.fiftymsecondhmloveapp.ResultFragment"
+        android:name="com.example.fiftymsecondhmloveapp.fragment.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
 </navigation>

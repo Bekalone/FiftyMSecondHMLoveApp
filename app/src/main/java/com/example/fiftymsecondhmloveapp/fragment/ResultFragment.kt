@@ -1,4 +1,4 @@
-package com.example.fiftymsecondhmloveapp
+package com.example.fiftymsecondhmloveapp.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,6 +26,11 @@ class ResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        result()
+
+    }
+
+    private fun result() {
         val love = arguments?.getSerializable("love") as LoveModel
         with(binding) {
             etBoy.text = love.firstName
@@ -33,11 +38,8 @@ class ResultFragment : Fragment() {
             tvResult.text = love.result
             tvPercentage.text = love.percentage.plus("%")
             btnTryAgain.setOnClickListener {
-
                 findNavController().navigateUp()
             }
         }
-
-
     }
 }

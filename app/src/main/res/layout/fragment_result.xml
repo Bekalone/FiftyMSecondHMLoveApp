@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".ResultFragment">
+    tools:context=".fragment.ResultFragment">
 
     <ImageView
         android:layout_width="match_parent"

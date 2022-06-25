@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.example.fiftymsecondhmloveapp.Prefs
 import com.example.fiftymsecondhmloveapp.R
+import com.example.fiftymsecondhmloveapp.board.BoardAdapter
 import com.example.fiftymsecondhmloveapp.databinding.FragmentBoardBinding
 import com.example.fiftymsecondhmloveapp.model.Board
 
