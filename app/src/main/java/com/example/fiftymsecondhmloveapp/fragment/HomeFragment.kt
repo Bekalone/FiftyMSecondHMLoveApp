@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.fiftymsecondhmloveapp.App
@@ -14,6 +16,7 @@ import com.example.fiftymsecondhmloveapp.Prefs
 import com.example.fiftymsecondhmloveapp.R
 import com.example.fiftymsecondhmloveapp.databinding.FragmentHomeBinding
 import com.example.fiftymsecondhmloveapp.model.LoveModel
+import com.example.fiftymsecondhmloveapp.viewmodel.LoveViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +24,7 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
+    val viewModel: LoveViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,22 +44,16 @@ class HomeFragment : Fragment() {
             btnCalculate.setOnClickListener {
                 val firstName = etBoy.text.toString()
                 val secondName = etGirl.text.toString()
-                App.loveApi.getPercentage(firstName, secondName).enqueue(object :
-                    Callback<LoveModel> {
-                    override fun onResponse(call: Call<LoveModel>, response: Response<LoveModel>) {
-                        Log.e("ololo", "onResponse:${response.body()?.percentage}")
-                        val love = response.body() as LoveModel
+                viewModel.getLiveLoveModel(firstName,secondName).observe(viewLifecycleOwner,
+                    Observer {
+                        Log.e("ololo","initClickers: $it")
+                        val love = it
                         val bundle = Bundle()
                         bundle.putSerializable("love", love)
                         findNavController().navigate(R.id.resultFragment, bundle)
                         etBoy.text.clear()
                         etGirl.text.clear()
-                    }
-
-                    override fun onFailure(call: Call<LoveModel>, t: Throwable) {
-                        Log.e("ololo", "onFailure:${t.message}")
-                    }
-                })
+                    })
             }
         }
     }
