@@ -8,20 +8,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.fiftymsecondhmloveapp.Prefs
 import com.example.fiftymsecondhmloveapp.R
 import com.example.fiftymsecondhmloveapp.databinding.FragmentHomeBinding
 import com.example.fiftymsecondhmloveapp.model.LoveModel
 import com.example.fiftymsecondhmloveapp.viewmodel.LoveViewModel
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     private val viewModel: LoveViewModel by viewModels()
+
+    @Inject
+    lateinit var prefs:Prefs
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onBoard()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +62,12 @@ class HomeFragment : Fragment() {
                     etGirl.text.clear()
                 }
             }
+        }
+    }
+
+    private fun onBoard() {
+        if (!prefs.isShown(requireContext())) {
+            findNavController().navigate(R.id.boardFragment)
         }
     }
 }

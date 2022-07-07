@@ -9,7 +9,6 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.example.fiftymsecondhmloveapp.Prefs
 import com.example.fiftymsecondhmloveapp.R
-import com.example.fiftymsecondhmloveapp.board.BoardAdapter
 import com.example.fiftymsecondhmloveapp.databinding.FragmentBoardBinding
 import com.example.fiftymsecondhmloveapp.model.Board
 
@@ -32,6 +31,7 @@ class BoardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = BoardAdapter(requireContext(),findNavController())
         binding.viewPager.adapter = adapter
+        binding.wormDotsIndicator.attachTo(binding.viewPager)
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
             activity?.finish()
         }
@@ -41,7 +41,7 @@ class BoardFragment : Fragment() {
         adapter.addItem(Board(R.raw.board_love4, "", "It's Fans and Many more"))
 
         binding.textSkip.setOnClickListener {
-            Prefs(requireContext()).saveState()
+            Prefs().saveState(requireContext())
             findNavController().navigateUp()
         }
     }

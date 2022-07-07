@@ -48,7 +48,7 @@ class BoardAdapter(val context: Context, val navController: NavController) :
                 binding.btnStart.visibility = View.INVISIBLE
             }
             binding.btnStart.setOnClickListener {
-                Prefs(context).saveState()
+                Prefs().saveState(context)
                 navController.navigateUp()
             }
         }
