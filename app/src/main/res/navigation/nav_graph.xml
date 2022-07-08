@@ -20,4 +20,9 @@
         android:name="com.example.fiftymsecondhmloveapp.fragment.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.fiftymsecondhmloveapp.fragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

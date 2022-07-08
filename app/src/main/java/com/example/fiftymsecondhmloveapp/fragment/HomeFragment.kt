@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.fiftymsecondhmloveapp.App
 import com.example.fiftymsecondhmloveapp.Prefs
 import com.example.fiftymsecondhmloveapp.R
 import com.example.fiftymsecondhmloveapp.databinding.FragmentHomeBinding
 import com.example.fiftymsecondhmloveapp.model.LoveModel
+import com.example.fiftymsecondhmloveapp.room.AppDataBase
 import com.example.fiftymsecondhmloveapp.viewmodel.LoveViewModel
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,12 +57,16 @@ class HomeFragment : Fragment() {
                 viewModel.getLiveLoveModel(firstName,secondName).observe(viewLifecycleOwner
                 ) { loveModel ->
                     Log.e("ololo", "initClickers: $loveModel")
+                    App.db.historyDao().insert(loveModel)
                     val bundle = Bundle()
                     bundle.putSerializable("love", loveModel)
                     findNavController().navigate(R.id.resultFragment, bundle)
                     etBoy.text.clear()
                     etGirl.text.clear()
                 }
+            }
+            btnHistory.setOnClickListener {
+                findNavController().navigate(R.id.historyFragment)
             }
         }
     }

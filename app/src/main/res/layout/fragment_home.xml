@@ -70,4 +70,12 @@
             android:textSize="20sp"
             android:padding="10dp"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="10dp"/>
+
 </LinearLayout>
